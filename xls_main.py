@@ -102,9 +102,8 @@ def write_smth(obj, name, action):
 
     try:
         df = pd.DataFrame.from_dict(obj, orient='index')
-        df.sort_values(by=['k'])
         df.set_index('k', inplace=True)
-        pprint.pprint(df)
+        df.sort_values(by=['k'])
         if action == '2':
             with open(name + '.csv', 'w') as a:
                 a.write(df.to_csv())
@@ -168,7 +167,7 @@ while status:
         elif action == '1':
             pprint.pprint((results[str(iterations)], added_results))
 
-        elif action == '2' or action == '3' or action == '4':
+        elif action in {'2', '3', '4'}:
             filename = input('Filename (no extension): ')
             print(write_smth(results, filename, action))
 
